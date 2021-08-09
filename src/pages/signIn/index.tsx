@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React, { useState } from "react";
 import Title from "~/components/title";
+import Button from "~/components/button";
 import { signIn, signOut, SignOutParams } from "~/lib/api/auth";
 
 const Index: React.VFC = () => {
@@ -36,9 +37,9 @@ const Index: React.VFC = () => {
 
       <main>
         <Title>Sign In</Title>
-        <button onClick={onClickHandler}>
+        <Button onClick={onClickHandler}>
           {authInfo ? "サインアウト" : "サインイン"}
-        </button>
+        </Button>
       </main>
     </div>
   );

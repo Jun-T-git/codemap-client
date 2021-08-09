@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import Title from "~/components/title";
+import Button from "~/components/button";
 import { deleteUser } from "~/lib/api/auth";
 import { fetchUsersDetail } from "~/lib/api/users";
 
@@ -16,13 +17,8 @@ const Index: React.VFC = () => {
       <main>
         <Title>トップ</Title>
         <div className="flex flex-col">
-          <Link href="/signIn">
-            <a>サインイン</a>
-          </Link>
-          <Link href="/signUp">
-            <a>サインアップ</a>
-          </Link>
-          <button
+          <Button
+            buttonStyle="white-filled"
             onClick={async () => {
               try {
                 const data = await fetchUsersDetail("2");
@@ -32,8 +28,8 @@ const Index: React.VFC = () => {
             }}
           >
             Fetch
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={async () => {
               try {
                 const data = await deleteUser({
@@ -47,7 +43,7 @@ const Index: React.VFC = () => {
             }}
           >
             Delete
-          </button>
+          </Button>
         </div>
       </main>
     </div>

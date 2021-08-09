@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import Title from "~/components/title";
+import Button from "~/components/button";
 import { signUp } from "~/lib/api/auth";
 
 const Index: React.VFC = () => {
@@ -13,7 +14,7 @@ const Index: React.VFC = () => {
 
       <main>
         <Title>Sign Up</Title>
-        <button
+        <Button
           onClick={async () => {
             try {
               await signUp({
@@ -29,7 +30,7 @@ const Index: React.VFC = () => {
           }}
         >
           サインアップ
-        </button>
+        </Button>
       </main>
     </div>
   );
