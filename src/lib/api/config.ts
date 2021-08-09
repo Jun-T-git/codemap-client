@@ -1,5 +1,3 @@
-// APIの共通事項
-
 import axiosBase, { AxiosResponse } from "axios";
 
 // APIのURL

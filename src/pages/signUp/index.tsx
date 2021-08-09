@@ -17,9 +17,11 @@ const Index: React.VFC = () => {
           onClick={async () => {
             try {
               await signUp({
-                email: "test3@example.com",
+                name: "name4",
+                email: "test4@example.com",
                 password: "password",
                 password_confirmation: "password",
+                image: "image",
               });
             } catch (error) {
               console.log(error);

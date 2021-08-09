@@ -1,20 +1,20 @@
-// Auth関係
-
 import { AxiosResponse } from "axios";
-import { axios } from "~/lib/api/api";
+import { axios } from "~/lib/api/config";
 
 /**
  * サインアップ
- * @param signUpParams
+ * @param SignUpParams
  */
 
-type signUpParams = {
+export type SignUpParams = {
+  name: string;
   email: string;
   password: string;
-  password_confirmation: string;
+  password_confirmation: string; // パスワード確認
+  image?: string; // プロフィール画像
 };
 
-export const signUp = async (params: signUpParams): Promise<AxiosResponse> => {
+export const signUp = async (params: SignUpParams): Promise<AxiosResponse> => {
   const endPoint = "/auth";
   const response = await axios.post(endPoint, params);
   console.log(response);
@@ -23,17 +23,57 @@ export const signUp = async (params: signUpParams): Promise<AxiosResponse> => {
 
 /**
  * サインイン
- * @param signInParams
+ * @param SignInParams
  */
 
-type signInParams = {
+export type SignInParams = {
   email: string;
   password: string;
 };
 
-export const signIn = async (params: signInParams): Promise<AxiosResponse> => {
+export const signIn = async (params: SignInParams): Promise<AxiosResponse> => {
   const endPoint = "/auth/sign_in";
   const response = await axios.post(endPoint, params);
+  console.log(response);
+  return response;
+};
+
+/**
+ * サインアウト
+ * @param SignOutParams
+ */
+
+export type SignOutParams = {
+  uid: string;
+  "access-token": string;
+  client: string;
+};
+
+export const signOut = async (
+  params: SignOutParams
+): Promise<AxiosResponse> => {
+  const endPoint = "/auth/sign_out";
+  const response = await axios.delete(endPoint, { data: params });
+  console.log(response);
+  return response;
+};
+
+/**
+ * アカウント削除
+ * @param DeleteUserParams
+ */
+
+export type DeleteUserParams = {
+  uid: string;
+  "access-token": string;
+  client: string;
+};
+
+export const deleteUser = async (
+  params: DeleteUserParams
+): Promise<AxiosResponse> => {
+  const endPoint = "/auth";
+  const response = await axios.delete(endPoint, { data: params });
   console.log(response);
   return response;
 };
