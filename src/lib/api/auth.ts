@@ -4,6 +4,24 @@ import { AxiosResponse } from "axios";
 import { axios } from "~/lib/api/api";
 
 /**
+ * サインアップ
+ * @param signUpParams
+ */
+
+type signUpParams = {
+  email: string;
+  password: string;
+  password_confirmation: string;
+};
+
+export const signUp = async (params: signUpParams): Promise<AxiosResponse> => {
+  const endPoint = "/auth";
+  const response = await axios.post(endPoint, params);
+  console.log(response);
+  return response;
+};
+
+/**
  * サインイン
  * @param signInParams
  */
