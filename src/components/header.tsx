@@ -10,6 +10,53 @@ import { useRouter } from "next/dist/client/router";
 
 const Header: React.VFC = () => {
   const router = useRouter();
+
+  const signedOutElement = (
+    <div className="flex space-x-3 items-center">
+      <Button
+        onClick={() => {
+          router.push("/signUp");
+        }}
+        buttonStyle="black-outlined"
+        className="px-2 whitespace-nowrap"
+      >
+        Sign Up
+      </Button>
+      <Button
+        onClick={() => {
+          router.push("/signIn");
+        }}
+        buttonStyle="black-outlined"
+        className="px-2 whitespace-nowrap"
+      >
+        Sign In
+      </Button>
+    </div>
+  );
+
+  const signedInElement = (
+    <div className="flex space-x-3 items-center">
+      <Button
+        onClick={() => {
+          router.push("/");
+        }}
+        buttonStyle="black-outlined"
+        className="px-2 whitespace-nowrap"
+      >
+        投稿する
+      </Button>
+      <div className="flex items-center">
+        <Image
+          src="/favicon.ico"
+          alt="avatar"
+          width={65}
+          height={65}
+          className="rounded-full object-cover bg-gray-100"
+        />
+      </div>
+    </div>
+  );
+
   return (
     <header className="bg-gray-700 flex justify-between px-3 py-3 items-center">
       <Link href="/">
@@ -17,35 +64,7 @@ const Header: React.VFC = () => {
           <div className="text-3xl font-bold text-white">Codemap</div>
         </a>
       </Link>
-      <div className="flex space-x-3 items-center">
-        <Button
-          onClick={() => {
-            router.push("/signUp");
-          }}
-          buttonStyle="black-outlined"
-          className="px-1"
-        >
-          Sign Up
-        </Button>
-        <Button
-          onClick={() => {
-            router.push("/signIn");
-          }}
-          buttonStyle="black-outlined"
-          className="px-1"
-        >
-          Sign In
-        </Button>
-        <div className="flex items-center">
-          <Image
-            src="/favicon.ico"
-            alt="avatar"
-            width={100}
-            height={100}
-            className="rounded-full object-cover bg-gray-100"
-          />
-        </div>
-      </div>
+      {signedOutElement}
     </header>
   );
 };
