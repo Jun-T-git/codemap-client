@@ -6,10 +6,10 @@ import Header from "~/components/header";
 
 const MyApp = ({ Component, pageProps }: AppProps): ReactElement => {
   return (
-    <div className="bg-gray-100 h-screen">
+    <>
       <Header />
       <Component {...pageProps} />
-    </div>
+    </>
   );
 };
 

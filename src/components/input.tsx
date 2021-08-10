@@ -28,20 +28,24 @@ const Input: React.VFC<Props> = ({
   className,
   onChange,
   onBlur,
-}) => (
-  <div>
-    <label className={"block text-gray-700 text-sm md:text-lg font-bold mb-2"}>
-      {label}
-    </label>
-    <input
-      placeholder={placeholder}
-      value={value}
-      type={type}
-      className={`${className} text-sm md:text-base bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-300`}
-      onChange={onChange}
-      onBlur={onBlur}
-    />
-  </div>
-);
+}) => {
+  return (
+    <div>
+      <label
+        className={"block text-gray-700 text-sm md:text-lg font-bold mb-2"}
+      >
+        {label}
+      </label>
+      <input
+        placeholder={placeholder}
+        value={value}
+        type={type}
+        className={`${className} text-sm md:text-base bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-300`}
+        onChange={onChange}
+        onBlur={onBlur}
+      />
+    </div>
+  );
+};
 
 export default Input;
