@@ -39,11 +39,6 @@ const Index: React.VFC = () => {
 
   return (
     <div>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main>
         <div className="bg-white border rounded px-16 py-10 mx-auto my-7 max-w-3xl flex flex-col space-y-14">
           <h1 className="text-3xl font-bold text-center">新規ユーザー登録</h1>
