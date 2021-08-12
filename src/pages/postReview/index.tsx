@@ -3,7 +3,7 @@ import Image from "next/image";
 import Button from "~/components/button";
 import Input from "~/components/input";
 import { useRouter } from "next/dist/client/router";
-import { PostBookParams, postBookRequest } from "~/lib/api/books";
+import { BookParams, postBookRequest } from "~/lib/api/books";
 
 const Index: React.VFC = () => {
   const [title, setTitle] = useState<string>("");
@@ -14,7 +14,7 @@ const Index: React.VFC = () => {
   const router = useRouter();
 
   const postBook = async () => {
-    const postBookParams: PostBookParams = {
+    const postBookParams: BookParams = {
       title: title,
       author: author,
       image: image,
@@ -41,7 +41,7 @@ const Index: React.VFC = () => {
                 alt="avatar"
                 width={100}
                 height={100}
-                className="object-cover bg-gray-100"
+                className="object-cover bg-blue-200"
               />
             </div>
             <Input
