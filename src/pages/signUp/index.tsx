@@ -1,9 +1,11 @@
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import React, { useState } from "react";
+import { useSetRecoilState } from "recoil";
 import Button from "~/components/button";
 import Input from "~/components/input";
-import { signUpRequest } from "~/lib/api/auth";
+import { SignUpParams, signUpRequest } from "~/lib/api/auth";
+import { authState } from "~/recoil/auth";
 
 const Index: React.VFC = () => {
   const [name, setName] = useState<string>("");
@@ -11,6 +13,7 @@ const Index: React.VFC = () => {
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
   const [image, setImage] = useState<string>("/favicon.ico");
+  const setAuthParams = useSetRecoilState(authState);
 
   const router = useRouter();
 
@@ -21,14 +24,21 @@ const Index: React.VFC = () => {
     setImage(imageUrl.replace("blob:", ""));
   };
 
-  const onClickHandler = async () => {
+  const signUp = async () => {
+    const signUpParams: SignUpParams = {
+      name: name,
+      email: email,
+      password: password,
+      password_confirmation: passwordConfirmation,
+      image: "",
+    };
     try {
-      await signUpRequest({
-        name: name,
-        email: email,
-        password: password,
-        password_confirmation: passwordConfirmation,
-        image: "",
+      const response = await signUpRequest(signUpParams);
+      console.log(response);
+      setAuthParams({
+        uid: response.headers["uid"],
+        "access-token": response.headers["access-token"],
+        client: response.headers["client"],
       });
       router.push("/");
     } catch (error) {
@@ -79,7 +89,7 @@ const Index: React.VFC = () => {
               onChange={(e) => setPasswordConfirmation(e.target.value)}
             />
           </div>
-          <Button onClick={onClickHandler}>サインアップ</Button>
+          <Button onClick={signUp}>サインアップ</Button>
         </div>
       </main>
     </div>
