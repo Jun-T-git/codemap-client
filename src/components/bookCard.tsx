@@ -12,7 +12,7 @@ import { BookParams } from "~/lib/api/books";
 
 const BookCard: React.VFC<BookParams> = ({ title, author, image, url }) => {
   return (
-    <div className="bg-white border rounded w-[18rem] h-[20rem] p-5">
+    <div className="bg-white border rounded w-[18rem] h-[20rem] p-5 hover:opacity-70">
       <div className="text-center">
         <Image
           src={image ? image : "/favicon.ico"}
