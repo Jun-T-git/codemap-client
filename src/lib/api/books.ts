@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import { axios } from "~/lib/api/config";
 
-export type PostBookParams = {
+export type BookParams = {
   title: string;
   author: string;
   image?: string;
@@ -16,9 +16,18 @@ export type PostBookParams = {
  * @param url
  */
 export const postBookRequest = async (
-  params: PostBookParams
+  params: BookParams
 ): Promise<AxiosResponse> => {
   const endPoint = `/books`;
   const response = await axios.post(endPoint, params);
+  return response;
+};
+
+/**
+ * 書籍情報を取得
+ */
+export const getBooksRequest = async (): Promise<AxiosResponse> => {
+  const endPoint = `/books`;
+  const response = await axios.get(endPoint);
   return response;
 };
