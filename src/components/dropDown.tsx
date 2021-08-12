@@ -26,7 +26,7 @@ const Dropdown: React.VFC<Props> = ({ children, menuItems, className }) => {
         <Menu.Button className={className}>{children}</Menu.Button>
         <Menu.Items
           as="div"
-          className="absolute top-[3.75rem] right-0 flex flex-col w-52 border rounded"
+          className="absolute top-[3.75rem] right-0 flex flex-col w-52 border rounded z-10"
         >
           {menuItems.map((menuItem, mi) => (
             <Menu.Item key={mi}>
