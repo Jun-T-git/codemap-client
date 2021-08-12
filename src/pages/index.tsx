@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import BookCard from "~/components/bookCard";
-import Button from "~/components/button";
-import { BookParams, getBooksRequest } from "~/lib/api/books";
+import { getBooksRequest } from "~/lib/api/books";
+import { Book } from "~/lib/types/book";
 
 const Index: React.VFC = () => {
-  const [books, setBooks] = useState<Array<BookParams>>([]);
+  const [books, setBooks] = useState<Array<Book>>([]);
 
   useEffect(() => {
     (async () => {
-      const booksData = await fetchBooks();
-      setBooks(booksData);
+      await fetchBooks();
     })();
   }, []);
 
@@ -17,7 +17,8 @@ const Index: React.VFC = () => {
     try {
       const response = await getBooksRequest();
       console.log(response);
-      return response.data.data;
+      const booksData = response.data.data;
+      setBooks(booksData);
     } catch (error) {
       console.log(error);
     }
@@ -27,15 +28,19 @@ const Index: React.VFC = () => {
     <div>
       <main>
         <div className="flex flex-wrap gap-4 p-4">
-          {books.map((book, bi) => (
-            <div>
+          {books.map((book) => (
+            <div key={book.id}>
               {
-                <BookCard
-                  title={book.title}
-                  author={book.author}
-                  image={book.image}
-                  url={book.url}
-                />
+                <Link href={`/books/${book.id}`}>
+                  <div>
+                    <BookCard
+                      title={book.title}
+                      author={book.author}
+                      image={book.image}
+                      url={book.url}
+                    />
+                  </div>
+                </Link>
               }
             </div>
           ))}
