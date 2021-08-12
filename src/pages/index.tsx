@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import Title from "~/components/title";
 import Button from "~/components/button";
-import { deleteUser } from "~/lib/api/auth";
+import { deleteUserRequest } from "~/lib/api/auth";
 import { fetchUsersDetail } from "~/lib/api/users";
 
 const Index: React.VFC = () => {
@@ -27,7 +27,7 @@ const Index: React.VFC = () => {
           <Button
             onClick={async () => {
               try {
-                const data = await deleteUser({
+                const data = await deleteUserRequest({
                   uid: "test4@example.com",
                   "access-token": "vnKmuOrm4eK0fuKQReB3RQ",
                   client: "FsIavo6b6AK6hULH1HYgbg",

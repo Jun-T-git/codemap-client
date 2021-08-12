@@ -4,6 +4,7 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import { ReactElement } from "react";
 import Header from "~/components/header";
+import { RecoilRoot } from "recoil";
 
 const MyApp = ({ Component, pageProps }: AppProps): ReactElement => {
   return (
@@ -12,8 +13,10 @@ const MyApp = ({ Component, pageProps }: AppProps): ReactElement => {
         <title>Codemap</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
-      <Component {...pageProps} />
+      <RecoilRoot>
+        <Header />
+        <Component {...pageProps} />
+      </RecoilRoot>
     </>
   );
 };

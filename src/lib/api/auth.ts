@@ -14,7 +14,9 @@ export type SignUpParams = {
   image?: string; // プロフィール画像
 };
 
-export const signUp = async (params: SignUpParams): Promise<AxiosResponse> => {
+export const signUpRequest = async (
+  params: SignUpParams
+): Promise<AxiosResponse> => {
   const endPoint = "/auth";
   const response = await axios.post(endPoint, params);
   console.log(response);
@@ -31,7 +33,9 @@ export type SignInParams = {
   password: string;
 };
 
-export const signIn = async (params: SignInParams): Promise<AxiosResponse> => {
+export const signInRequest = async (
+  params: SignInParams
+): Promise<AxiosResponse> => {
   const endPoint = "/auth/sign_in";
   const response = await axios.post(endPoint, params);
   console.log(response);
@@ -40,17 +44,17 @@ export const signIn = async (params: SignInParams): Promise<AxiosResponse> => {
 
 /**
  * サインアウト
- * @param SignOutParams
+ * @param AuthParams
  */
 
-export type SignOutParams = {
+export type AuthParams = {
   uid: string;
   "access-token": string;
   client: string;
 };
 
-export const signOut = async (
-  params: SignOutParams
+export const signOutRequest = async (
+  params: AuthParams
 ): Promise<AxiosResponse> => {
   const endPoint = "/auth/sign_out";
   const response = await axios.delete(endPoint, { data: params });
@@ -60,17 +64,11 @@ export const signOut = async (
 
 /**
  * アカウント削除
- * @param DeleteUserParams
+ * @param AuthParams
  */
 
-export type DeleteUserParams = {
-  uid: string;
-  "access-token": string;
-  client: string;
-};
-
-export const deleteUser = async (
-  params: DeleteUserParams
+export const deleteUserRequest = async (
+  params: AuthParams
 ): Promise<AxiosResponse> => {
   const endPoint = "/auth";
   const response = await axios.delete(endPoint, { data: params });

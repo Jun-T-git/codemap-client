@@ -1,14 +1,16 @@
-import React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import Button from "./button";
+import Button from "~/components/button";
 import { useRouter } from "next/dist/client/router";
+import { useRecoilValue } from "recoil";
+import { authState } from "~/recoil/auth";
+import IconDropdown from "~/components/iconDropDown";
 
 /**
  * ヘッダーコンポーネント
  */
 
 const Header: React.VFC = () => {
+  const authParams = useRecoilValue(authState);
   const router = useRouter();
 
   const signedOutElement = (
@@ -45,15 +47,7 @@ const Header: React.VFC = () => {
       >
         投稿する
       </Button>
-      <div className="flex items-center">
-        <Image
-          src="/favicon.ico"
-          alt="avatar"
-          width={65}
-          height={65}
-          className="rounded-full object-cover bg-gray-100"
-        />
-      </div>
+      <IconDropdown />
     </div>
   );
 
@@ -64,7 +58,7 @@ const Header: React.VFC = () => {
           <div className="text-3xl font-bold text-white">Codemap</div>
         </a>
       </Link>
-      {signedOutElement}
+      {authParams.uid ? signedInElement : signedOutElement}
     </header>
   );
 };

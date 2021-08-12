@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Button from "~/components/button";
 import Input from "~/components/input";
-import { signUp } from "~/lib/api/auth";
+import { signUpRequest } from "~/lib/api/auth";
 
 const Index: React.VFC = () => {
   const [name, setName] = useState<string>("");
@@ -24,7 +24,7 @@ const Index: React.VFC = () => {
 
   const onClickHandler = async () => {
     try {
-      await signUp({
+      await signUpRequest({
         name: name,
         email: email,
         password: password,

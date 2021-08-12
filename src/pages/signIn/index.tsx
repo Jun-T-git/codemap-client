@@ -1,32 +1,33 @@
 import React, { useState } from "react";
 import Button from "~/components/button";
-import { signIn, signOut, SignOutParams } from "~/lib/api/auth";
 import Input from "~/components/input";
 import { useRouter } from "next/dist/client/router";
+import { useRecoilState } from "recoil";
+import { authState } from "~/recoil/auth";
+import { SignInParams, signInRequest } from "~/lib/api/auth";
 
 const Index: React.VFC = () => {
-  const [authInfo, setAuthInfo] = useState<SignOutParams | null>(null);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [authParams, setAuthParams] = useRecoilState(authState);
+  // const [email, setEmail] = useState<string>("");
+  // const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("test2@example.com");
+  const [password, setPassword] = useState<string>("password");
 
   const router = useRouter();
 
-  const onClickHandler = async () => {
+  const signIn = async () => {
+    const signInParams: SignInParams = {
+      email: email,
+      password: password,
+    };
     try {
-      if (authInfo === null) {
-        const response = await signIn({
-          email: email,
-          password: password,
-        });
-        setAuthInfo({
-          uid: response.headers["uid"],
-          "access-token": response.headers["access-token"],
-          client: response.headers["client"],
-        });
-      } else {
-        const response = await signOut(authInfo);
-        setAuthInfo(null);
-      }
+      const response = await signInRequest(signInParams);
+      console.log(response);
+      setAuthParams({
+        uid: response.headers["uid"],
+        "access-token": response.headers["access-token"],
+        client: response.headers["client"],
+      });
       router.push("/");
     } catch (error) {
       console.log(error);
@@ -53,9 +54,7 @@ const Index: React.VFC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Button onClick={onClickHandler}>
-            {authInfo ? "サインアウト" : "サインイン"}
-          </Button>
+          <Button onClick={signIn}>サインイン</Button>
         </div>
       </main>
     </div>
