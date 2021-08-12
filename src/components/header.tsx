@@ -40,7 +40,7 @@ const Header: React.VFC = () => {
     <div className="flex space-x-3 items-center">
       <Button
         onClick={() => {
-          router.push("/");
+          router.push("/postReview");
         }}
         buttonStyle="black-outlined"
         className="px-2 whitespace-nowrap"
