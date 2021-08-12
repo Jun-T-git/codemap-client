@@ -45,13 +45,13 @@ const IconDropdown: React.VFC = () => {
 
   return (
     <>
-      <Dropdown menuItems={menuItems}>
+      <Dropdown menuItems={menuItems} className="flex items-center">
         <Image
           src="/favicon.ico"
           alt="avatar"
           width={65}
           height={65}
-          className="rounded-full object-cover bg-gray-100"
+          className="rounded-full object-cover bg-red-200"
         />
       </Dropdown>
       <Modal

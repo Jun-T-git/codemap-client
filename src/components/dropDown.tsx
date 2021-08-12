@@ -9,19 +9,21 @@ type MenuItem = {
 type Props = {
   children: JSX.Element;
   menuItems: Array<MenuItem>;
+  className?: string;
 };
 
 /**
  * ドロップダウンメニュー
  * @param children メニューを開くボタン
  * @param menuItems メニューの項目
+ * @param className
  */
 
-const Dropdown: React.VFC<Props> = ({ children, menuItems }) => {
+const Dropdown: React.VFC<Props> = ({ children, menuItems, className }) => {
   return (
     <Menu>
       <div className="relative">
-        <Menu.Button>{children}</Menu.Button>
+        <Menu.Button className={className}>{children}</Menu.Button>
         <Menu.Items
           as="div"
           className="absolute top-[3.75rem] right-0 flex flex-col w-52 border rounded"
