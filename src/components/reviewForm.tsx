@@ -50,7 +50,7 @@ const ReviewForm: React.VFC<Props> = ({
       <div className="flex flex-col space-y-7">
         <Input
           label="タイトル"
-          placeholder="name1"
+          placeholder="例：エンジニアの必読書！"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -65,7 +65,7 @@ const ReviewForm: React.VFC<Props> = ({
               value={recommendationLevel}
               isHalf={false}
               edit={true}
-              onChange={(e) => setRecommendationLevel(Number(e.target.value))}
+              onChange={(value) => setRecommendationLevel(Number(value))}
             />
           </div>
           <div className="flex space-x-3 items-center">
@@ -78,13 +78,13 @@ const ReviewForm: React.VFC<Props> = ({
               value={difficultyLevel}
               isHalf={false}
               edit={true}
-              onChange={(e) => setDifficultyLevel(Number(e.target.value))}
+              onChange={(value) => setDifficultyLevel(Number(value))}
             />
           </div>
         </div>
         <Input
           label="詳細"
-          placeholder="test1@example.com"
+          placeholder={`例：\n「良いコードとは何か」について書かれた本です。\n使用する言語に関係なく、エンジニアとして生きていくなら必ず役に立つと思います。`}
           value={content}
           type={"textarea"}
           onChange={(e) => setContent(e.target.value)}

@@ -34,7 +34,7 @@ const ReviewCard: React.VFC<Props> = ({ review }) => {
           />
         </div>
       </div>
-      <p className="text-sm my-1">{review.content}</p>
+      <p className="text-sm my-1 whitespace-pre-wrap">{review.content}</p>
     </div>
   );
 };
