@@ -8,7 +8,7 @@ import ReviewForm from "~/components/reviewForm";
 import { getBookDetailRequest } from "~/lib/api/books";
 import { Book } from "~/lib/types/book";
 import { Review } from "~/lib/types/review";
-import { authState } from "~/recoil/auth";
+import { userInfoState } from "~/recoil/userInfo";
 
 const Post = () => {
   const initialBook: Book = {
@@ -21,7 +21,7 @@ const Post = () => {
     updated_at: "",
   };
 
-  const authParams = useRecoilValue(authState);
+  const userInfo = useRecoilValue(userInfoState);
   const [book, setBook] = useState<Book>(initialBook);
   const [reviews, setReviews] = useState<Array<Review>>([]);
   const router = useRouter();
@@ -65,7 +65,7 @@ const Post = () => {
           <p>この書籍のレビューはまだ投稿されていません。</p>
         )}
       </div>
-      {authParams.uid ? (
+      {userInfo.auth.uid ? (
         // サインインしている場合
         <ReviewForm
           userId={"3"}

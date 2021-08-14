@@ -3,13 +3,11 @@ import Button from "~/components/button";
 import Input from "~/components/input";
 import { useRouter } from "next/dist/client/router";
 import { useRecoilState } from "recoil";
-import { authState } from "~/recoil/auth";
+import { userInfoState } from "~/recoil/userInfo";
 import { SignInParams, signInRequest } from "~/lib/api/auth";
 
 const Index: React.VFC = () => {
-  const [authParams, setAuthParams] = useRecoilState(authState);
-  // const [email, setEmail] = useState<string>("");
-  // const [password, setPassword] = useState<string>("");
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [email, setEmail] = useState<string>("test2@example.com");
   const [password, setPassword] = useState<string>("password");
 
@@ -23,10 +21,13 @@ const Index: React.VFC = () => {
     try {
       const response = await signInRequest(signInParams);
       console.log(response);
-      setAuthParams({
-        uid: response.headers["uid"],
-        "access-token": response.headers["access-token"],
-        client: response.headers["client"],
+      setUserInfo({
+        userId: response.data.data.id,
+        auth: {
+          uid: response.headers["uid"],
+          "access-token": response.headers["access-token"],
+          client: response.headers["client"],
+        },
       });
       router.push("/");
     } catch (error) {

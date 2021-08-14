@@ -2,7 +2,7 @@ import Link from "next/link";
 import Button from "~/components/button";
 import { useRouter } from "next/dist/client/router";
 import { useRecoilValue } from "recoil";
-import { authState } from "~/recoil/auth";
+import { userInfoState } from "~/recoil/userInfo";
 import IconDropdown from "~/components/iconDropDown";
 
 /**
@@ -10,7 +10,7 @@ import IconDropdown from "~/components/iconDropDown";
  */
 
 const Header: React.VFC = () => {
-  const authParams = useRecoilValue(authState);
+  const userInfo = useRecoilValue(userInfoState);
   const router = useRouter();
 
   const signedOutElement = (
@@ -58,7 +58,7 @@ const Header: React.VFC = () => {
           <div className="text-3xl font-bold text-white">Codemap</div>
         </a>
       </Link>
-      {authParams.uid ? signedInElement : signedOutElement}
+      {userInfo.auth.uid ? signedInElement : signedOutElement}
     </header>
   );
 };

@@ -5,7 +5,7 @@ import { useSetRecoilState } from "recoil";
 import Button from "~/components/button";
 import Input from "~/components/input";
 import { SignUpParams, signUpRequest } from "~/lib/api/auth";
-import { authState } from "~/recoil/auth";
+import { userInfoState } from "~/recoil/userInfo";
 
 const Index: React.VFC = () => {
   const [name, setName] = useState<string>("");
@@ -13,7 +13,7 @@ const Index: React.VFC = () => {
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
   const [image, setImage] = useState<string>("/favicon.ico");
-  const setAuthParams = useSetRecoilState(authState);
+  const setUserInfo = useSetRecoilState(userInfoState);
 
   const router = useRouter();
 
@@ -35,10 +35,13 @@ const Index: React.VFC = () => {
     try {
       const response = await signUpRequest(signUpParams);
       console.log(response);
-      setAuthParams({
-        uid: response.headers["uid"],
-        "access-token": response.headers["access-token"],
-        client: response.headers["client"],
+      setUserInfo({
+        userId: response.data.data.id,
+        auth: {
+          uid: response.headers["uid"],
+          "access-token": response.headers["access-token"],
+          client: response.headers["client"],
+        },
       });
       router.push("/");
     } catch (error) {
