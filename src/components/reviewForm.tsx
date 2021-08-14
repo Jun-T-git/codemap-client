@@ -1,17 +1,47 @@
 import React, { useState } from "react";
+import { PostReviewParams, PostReviewRequest } from "~/lib/api/reviews";
 import Button from "./button";
 import Input from "./input";
 
+type Props = {
+  userId: string;
+  bookId: string;
+  onPost?: Function;
+};
+
 /**
  * レビューの投稿フォーム
- * @param children 内容
+ * @param userId
+ * @param bookId
+ * @param onPost 投稿後の処理
  */
 
-const ReviewForm: React.VFC = () => {
+const ReviewForm: React.VFC<Props> = ({
+  userId,
+  bookId,
+  onPost = () => {},
+}) => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [recommendationLevel, setRecommendationLevel] = useState<number>(5);
   const [difficultyLevel, setdifficultyLevel] = useState<number>(5);
+
+  const postReview = async () => {
+    const postReviewParams: PostReviewParams = {
+      title: title,
+      content: content,
+      recommendation_level: recommendationLevel,
+      difficulty_level: difficultyLevel,
+      user_id: userId,
+      book_id: bookId,
+    };
+    try {
+      const response = await PostReviewRequest(postReviewParams);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="bg-white border rounded px-16 py-10 mx-auto my-7 max-w-3xl flex flex-col space-y-14">
@@ -41,7 +71,14 @@ const ReviewForm: React.VFC = () => {
           value={String(difficultyLevel)}
           onChange={(e) => setdifficultyLevel(Number(e.target.value))}
         />
-        <Button onClick={() => {}}>投稿</Button>
+        <Button
+          onClick={async () => {
+            await postReview();
+            onPost();
+          }}
+        >
+          投稿
+        </Button>
       </div>
     </div>
   );
