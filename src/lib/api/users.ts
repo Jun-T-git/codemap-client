@@ -6,9 +6,10 @@ import { axios } from "~/lib/api/config";
  * @param id
  */
 
-export const fetchUsersDetail = async (id: string): Promise<AxiosResponse> => {
+export const getUserDetailRequest = async (
+  id: string
+): Promise<AxiosResponse> => {
   const endPoint = `/users/${id}`;
   const response = await axios.get(endPoint);
-  console.log(response);
   return response;
 };
