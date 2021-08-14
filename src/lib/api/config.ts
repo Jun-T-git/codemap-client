@@ -1,7 +1,8 @@
-import axiosBase, { AxiosResponse } from "axios";
+import axiosBase from "axios";
 
 // APIのURL
-export const apiBaseUrl = "http://localhost:8000/api/v1";
+export const apiBaseUrl = process.env.NEXT_PUBLIC_API_ENDPOINT;
+console.log(apiBaseUrl);
 
 // axiosの基本設定
 export const axios = axiosBase.create({
