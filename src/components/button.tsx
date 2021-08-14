@@ -1,6 +1,10 @@
 import { MouseEventHandler } from "react";
 
-export type ButtonStyle = "black-filled" | "white-filled" | "black-outlined";
+export type ButtonStyle =
+  | "black-filled"
+  | "white-filled"
+  | "black-outlined"
+  | "white-outlined";
 
 type Props = {
   children: string;
@@ -33,7 +37,12 @@ const Button: React.VFC<Props> = ({
       break;
     case "black-outlined":
       styleClass =
-        "text-white border border-white hover:text-gray-700 hover:bg-gray-200";
+        "text-gray-900 border border-gray-700 border-2 hover:bg-gray-500 hover:text-white";
+      break;
+    case "white-outlined":
+      styleClass =
+        "text-white border border-white border-2 hover:text-gray-700 hover:bg-gray-200";
+      break;
   }
   return (
     <button
