@@ -1,10 +1,14 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import BookDetail from "~/components/bookDetail";
 import Button from "~/components/button";
+import ReviewCard from "~/components/reviewCard";
 import ReviewForm from "~/components/reviewForm";
 import { getBookDetailRequest } from "~/lib/api/books";
 import { Book } from "~/lib/types/book";
 import { Review } from "~/lib/types/review";
+import { authState } from "~/recoil/auth";
 
 const Post = () => {
   const initialBook: Book = {
@@ -17,6 +21,7 @@ const Post = () => {
     updated_at: "",
   };
 
+  const authParams = useRecoilValue(authState);
   const [book, setBook] = useState<Book>(initialBook);
   const [reviews, setReviews] = useState<Array<Review>>([]);
   const router = useRouter();
@@ -49,27 +54,43 @@ const Post = () => {
   };
 
   return (
-    <>
-      <div className="bg-gray-300">
-        <h1>Book Detail</h1>
-        <p>{book.title}</p>
-        <p>{book.author}</p>
+    <div className="px-3 py-3 flex flex-col space-y-4">
+      <BookDetail book={book} />
+      <div>
+        {reviews.length !== 0 ? (
+          reviews.map((review) => (
+            <ReviewCard key={review.id} review={review} />
+          ))
+        ) : (
+          <p>この書籍のレビューはまだ投稿されていません。</p>
+        )}
       </div>
-      <div className="bg-gray-300">
-        <h1>Review Detail</h1>
-        {reviews.map((review) => (
-          <div key={review.id}>
-            <p>{review.title}</p>
-            <p>{review.content}</p>
+      {authParams.uid ? (
+        // サインインしている場合
+        <ReviewForm
+          userId={"3"}
+          bookId={bid}
+          onPost={async () => await fetchBook()}
+        />
+      ) : (
+        // サインインしていない場合
+        <div className="bg-white border rounded px-5 py-10 mx-auto w-full flex flex-col space-y-7">
+          <h1 className="text-2xl font-bold text-center">レビューを投稿する</h1>
+          <p className="text-center">
+            レビューの投稿は登録済みのユーザーのみご利用いただけます。
+          </p>
+          <div className="flex space-x-4">
+            <Button
+              onClick={() => router.push("/signIn")}
+              buttonStyle="black-outlined"
+            >
+              新規登録
+            </Button>
+            <Button onClick={() => router.push("/signUp")}>サインイン</Button>
           </div>
-        ))}
-      </div>
-      <ReviewForm
-        userId={"3"}
-        bookId={bid}
-        onPost={async () => await fetchBook()}
-      />
-    </>
+        </div>
+      )}
+    </div>
   );
 };
 
