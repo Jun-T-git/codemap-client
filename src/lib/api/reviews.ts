@@ -6,6 +6,8 @@ export type PostReviewParams = {
   content: string;
   recommendation_level: number;
   difficulty_level: number;
+  user_id: string;
+  book_id: string;
 };
 
 /**
@@ -22,12 +24,3 @@ export const PostReviewRequest = async (
   const response = await axios.post(endPoint, params);
   return response;
 };
-
-/**
- * レビュー情報を取得
- */
-// export const getReviewsByBook = async (): Promise<AxiosResponse> => {
-//   const endPoint = `/reviews`;
-//   const response = await axios.get(endPoint);
-//   return response;
-// };
