@@ -54,10 +54,10 @@ const ReviewForm: React.VFC<Props> = ({
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <div className="flex justify-evenly items-center">
-          <div className="flex space-x-2 items-center">
+        <div className="grid grid-cols-2">
+          <div className="flex space-x-3 items-center">
             <label className="text-gray-700 text-sm md:text-lg font-bold">
-              おすすめ度：
+              おすすめ度
             </label>
             <ReactStars
               count={5}
@@ -68,9 +68,9 @@ const ReviewForm: React.VFC<Props> = ({
               onChange={(e) => setRecommendationLevel(Number(e.target.value))}
             />
           </div>
-          <div className="flex space-x-2 items-center">
+          <div className="flex space-x-3 items-center">
             <label className="text-gray-700 text-sm md:text-lg font-bold">
-              難易度：
+              難易度
             </label>
             <ReactStars
               count={5}
