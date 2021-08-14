@@ -27,18 +27,13 @@ const Index: React.VFC = () => {
   return (
     <div>
       <main>
-        <div className="flex flex-wrap gap-4 p-4">
+        <div className="flex flex-wrap gap-2 p-4">
           {books.map((book) => (
             <div key={book.id}>
               {
                 <Link href={`/books/${book.id}`}>
                   <div>
-                    <BookCard
-                      title={book.title}
-                      author={book.author}
-                      image={book.image}
-                      url={book.url}
-                    />
+                    <BookCard book={book} />
                   </div>
                 </Link>
               }
