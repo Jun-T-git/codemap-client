@@ -19,7 +19,7 @@ const Header: React.VFC = () => {
         onClick={() => {
           router.push("/signUp");
         }}
-        buttonStyle="black-outlined"
+        buttonStyle="white-outlined"
         className="px-2 whitespace-nowrap"
       >
         Sign Up
@@ -28,7 +28,7 @@ const Header: React.VFC = () => {
         onClick={() => {
           router.push("/signIn");
         }}
-        buttonStyle="black-outlined"
+        buttonStyle="white-outlined"
         className="px-2 whitespace-nowrap"
       >
         Sign In
@@ -42,7 +42,7 @@ const Header: React.VFC = () => {
         onClick={() => {
           router.push("/bookRegistration");
         }}
-        buttonStyle="black-outlined"
+        buttonStyle="white-outlined"
         className="px-2 whitespace-nowrap"
       >
         投稿する
