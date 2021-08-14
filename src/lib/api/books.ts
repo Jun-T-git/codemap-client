@@ -15,7 +15,7 @@ export type PostBookParams = {
  * @param image
  * @param url
  */
-export const PostBookRequest = async (
+export const postBookRequest = async (
   params: PostBookParams
 ): Promise<AxiosResponse> => {
   const endPoint = `/books`;
