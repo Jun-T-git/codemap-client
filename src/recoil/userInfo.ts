@@ -1,15 +1,27 @@
 import { atom, RecoilState } from "recoil";
 import { AuthParams } from "~/lib/api/auth";
 
+export type Profile = {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+};
+
 export type UserInfo = {
-  userId: string;
+  profile: Profile;
   auth: AuthParams;
 };
 
 export const userInfoState: RecoilState<UserInfo> = atom({
   key: "recoil/auth",
   default: {
-    userId: "",
+    profile: {
+      id: "",
+      name: "",
+      email: "",
+      image: "",
+    },
     auth: {
       uid: "",
       "access-token": "",

@@ -35,7 +35,7 @@ const IconDropdown: React.VFC = () => {
   const menuItems = [
     {
       text: "Profile",
-      onClick: () => router.push(`/users/${userInfo.userId}`),
+      onClick: () => router.push(`/users/${userInfo.profile.id}`),
     },
     {
       text: "Sign Out",
@@ -47,7 +47,9 @@ const IconDropdown: React.VFC = () => {
     <>
       <Dropdown menuItems={menuItems} className="flex items-center">
         <Image
-          src="/favicon.ico"
+          src={
+            userInfo.profile.image ? userInfo.profile.image : "/userNoImage.png"
+          }
           alt="avatar"
           width={65}
           height={65}

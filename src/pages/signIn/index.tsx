@@ -22,7 +22,11 @@ const Index: React.VFC = () => {
       const response = await signInRequest(signInParams);
       console.log(response);
       setUserInfo({
-        userId: response.data.data.id,
+        profile: {
+          id: response.data.data.id,
+          name: response.data.data.name,
+          image: response.data.data.image,
+        },
         auth: {
           uid: response.headers["uid"],
           "access-token": response.headers["access-token"],
