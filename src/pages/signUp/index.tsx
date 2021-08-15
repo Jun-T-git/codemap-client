@@ -37,6 +37,7 @@ const Index: React.VFC = () => {
         profile: {
           id: response.data.data.id,
           name: response.data.data.name,
+          email: response.data.data.email,
           image: response.data.data.image,
         },
         auth: {
