@@ -13,7 +13,7 @@ type Props = {
 
 const BookCard: React.VFC<Props> = ({ book }) => {
   return (
-    <div className="bg-white border rounded w-[23rem] h-[20rem] p-5 hover:opacity-70">
+    <div className="bg-white border rounded h-[20rem] p-5 hover:opacity-70">
       <div className="text-center">
         <Image
           src={book.image ? book.image : "/favicon.ico"}

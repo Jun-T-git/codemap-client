@@ -81,12 +81,12 @@ const Post = () => {
           </p>
           <div className="flex space-x-4">
             <Button
-              onClick={() => router.push("/signIn")}
+              onClick={() => router.push("/signUp")}
               buttonStyle="black-outlined"
             >
               新規登録
             </Button>
-            <Button onClick={() => router.push("/signUp")}>サインイン</Button>
+            <Button onClick={() => router.push("/signIn")}>サインイン</Button>
           </div>
         </div>
       )}
