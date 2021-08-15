@@ -68,7 +68,7 @@ const Post = () => {
       {userInfo.auth.uid ? (
         // サインインしている場合
         <ReviewForm
-          userId={"3"}
+          userId={userInfo.userId}
           bookId={bid}
           onPost={async () => await fetchBook()}
         />
