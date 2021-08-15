@@ -1,5 +1,4 @@
 import { useRouter } from "next/dist/client/router";
-import Image from "next/image";
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import Button from "~/components/button";
@@ -12,7 +11,7 @@ const Index: React.VFC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
-  const [image, setImage] = useState<string>("/favicon.ico");
+  const [image, setImage] = useState<string>("");
   const setUserInfo = useSetRecoilState(userInfoState);
 
   const router = useRouter();
@@ -20,8 +19,7 @@ const Index: React.VFC = () => {
   const processImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageFile = event.target.files[0];
     const imageUrl = URL.createObjectURL(imageFile);
-    console.log(imageUrl.replace("blob:", ""));
-    setImage(imageUrl.replace("blob:", ""));
+    setImage(imageUrl);
   };
 
   const signUp = async () => {
@@ -36,7 +34,11 @@ const Index: React.VFC = () => {
       const response = await signUpRequest(signUpParams);
       console.log(response);
       setUserInfo({
-        userId: response.data.data.id,
+        profile: {
+          id: response.data.data.id,
+          name: response.data.data.name,
+          image: response.data.data.image,
+        },
         auth: {
           uid: response.headers["uid"],
           "access-token": response.headers["access-token"],
@@ -55,16 +57,19 @@ const Index: React.VFC = () => {
         <div className="bg-white border rounded px-16 py-10 mx-auto my-7 max-w-3xl flex flex-col space-y-14">
           <h1 className="text-3xl font-bold text-center">新規ユーザー登録</h1>
           <div className="flex flex-col space-y-7">
-            <div className="text-center">
-              <Image
-                src={image}
+            <label className="w-52 h-52 mx-auto rounded-full">
+              <img
+                src={image ? image : "/userNoImage.png"}
                 alt="avatar"
-                width={100}
-                height={100}
-                className="rounded-full object-cover bg-gray-100"
+                className="w-52 h-52 rounded-full object-cover border"
               />
-            </div>
-            {/* <input type="file" accept="image/*" onChange={processImage} /> */}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={processImage}
+                className="hidden"
+              />
+            </label>
             <Input
               label="名前"
               placeholder="name1"

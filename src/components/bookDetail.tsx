@@ -15,11 +15,10 @@ const BookDetail: React.VFC<Props> = ({ book }) => {
   return (
     <div className="bg-white border rounded min-h-[15rem] p-5 flex space-x-10">
       <Image
-        src={book.image ? book.image : "/favicon.ico"}
+        src={book.image ? book.image : "/bookNoImage.png"}
         alt="avatar"
         width={250}
         height={250}
-        className="bg-blue-200"
       />
       <div>
         <h2 className={"text-xl font-bold"}>{book.title}</h2>

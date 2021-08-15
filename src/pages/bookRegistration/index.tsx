@@ -8,7 +8,7 @@ import { PostBookParams, postBookRequest } from "~/lib/api/books";
 const Index: React.VFC = () => {
   const [title, setTitle] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
-  const [image, setImage] = useState<string>("/favicon.ico");
+  const [image, setImage] = useState<string>("");
   const [url, setUrl] = useState<string>("");
 
   const router = useRouter();
@@ -29,21 +29,31 @@ const Index: React.VFC = () => {
     }
   };
 
+  const processImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const imageFile = event.target.files[0];
+    const imageUrl = URL.createObjectURL(imageFile);
+    setImage(imageUrl);
+  };
+
   return (
     <div>
       <main>
         <div className="bg-white border rounded px-16 py-10 mx-auto my-7 max-w-3xl flex flex-col space-y-14">
           <h1 className="text-3xl font-bold text-center">書籍を登録する</h1>
           <div className="flex flex-col space-y-7">
-            <div className="text-center">
-              <Image
-                src={image}
-                alt="avatar"
-                width={100}
-                height={100}
-                className="object-cover bg-blue-200"
+            <label className="w-52 h-52 mx-auto">
+              <img
+                src={image ? image : "/bookNoImage.png"}
+                alt="book"
+                className="w-52 h-52 object-cover border"
               />
-            </div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={processImage}
+                className="hidden"
+              />
+            </label>
             <Input
               label="タイトル"
               placeholder="title1"

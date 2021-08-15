@@ -16,7 +16,7 @@ const BookCard: React.VFC<Props> = ({ book }) => {
     <div className="bg-white border rounded h-[20rem] p-5 hover:opacity-70">
       <div className="text-center">
         <Image
-          src={book.image ? book.image : "/favicon.ico"}
+          src={book.image ? book.image : "/bookNoImage.png"}
           alt="avatar"
           width={170}
           height={170}
