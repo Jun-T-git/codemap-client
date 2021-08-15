@@ -8,7 +8,7 @@ import { SignInParams, signInRequest } from "~/lib/api/auth";
 
 const Index: React.VFC = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  const [email, setEmail] = useState<string>("test2@example.com");
+  const [email, setEmail] = useState<string>("test@example.com");
   const [password, setPassword] = useState<string>("password");
 
   const router = useRouter();
@@ -48,7 +48,7 @@ const Index: React.VFC = () => {
           <div className="flex flex-col space-y-7">
             <Input
               label="メールアドレス"
-              placeholder="test1@example.com"
+              placeholder="test@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
