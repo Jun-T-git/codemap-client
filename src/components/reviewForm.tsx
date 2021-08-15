@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactStars from "react-rating-stars-component";
-import { PostReviewParams, PostReviewRequest } from "~/lib/api/reviews";
+import { PostReviewParams, postReviewRequest } from "~/lib/api/reviews";
 import Button from "./button";
 import Input from "./input";
 
@@ -37,7 +37,7 @@ const ReviewForm: React.VFC<Props> = ({
       book_id: bookId,
     };
     try {
-      const response = await PostReviewRequest(postReviewParams);
+      const response = await postReviewRequest(postReviewParams);
       console.log(response);
     } catch (error) {
       console.log(error);

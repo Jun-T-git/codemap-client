@@ -17,7 +17,7 @@ export type PostReviewParams = {
  * @param recommendation_level
  * @param difficulty_level
  */
-export const PostReviewRequest = async (
+export const postReviewRequest = async (
   params: PostReviewParams
 ): Promise<AxiosResponse> => {
   const endPoint = `/reviews`;
