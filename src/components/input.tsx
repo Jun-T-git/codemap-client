@@ -6,8 +6,8 @@ type Props = {
   type?: string;
   label?: string;
   className?: string;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
-  onBlur?: FocusEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 };
 /**
  * 入力欄コンポーネント
@@ -36,14 +36,25 @@ const Input: React.VFC<Props> = ({
       >
         {label}
       </label>
-      <input
-        placeholder={placeholder}
-        value={value}
-        type={type}
-        className={`${className} text-sm md:text-base bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-300`}
-        onChange={onChange}
-        onBlur={onBlur}
-      />
+      {type !== "textarea" ? (
+        <input
+          placeholder={placeholder}
+          value={value}
+          type={type}
+          className={`${className} text-sm md:text-base bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-300`}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+      ) : (
+        <textarea
+          placeholder={placeholder}
+          value={value}
+          rows={10}
+          className={`${className} text-sm md:text-base bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-300`}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+      )}
     </div>
   );
 };

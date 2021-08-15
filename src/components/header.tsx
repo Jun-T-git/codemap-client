@@ -2,7 +2,7 @@ import Link from "next/link";
 import Button from "~/components/button";
 import { useRouter } from "next/dist/client/router";
 import { useRecoilValue } from "recoil";
-import { authState } from "~/recoil/auth";
+import { userInfoState } from "~/recoil/userInfo";
 import IconDropdown from "~/components/iconDropDown";
 
 /**
@@ -10,7 +10,7 @@ import IconDropdown from "~/components/iconDropDown";
  */
 
 const Header: React.VFC = () => {
-  const authParams = useRecoilValue(authState);
+  const userInfo = useRecoilValue(userInfoState);
   const router = useRouter();
 
   const signedOutElement = (
@@ -19,7 +19,7 @@ const Header: React.VFC = () => {
         onClick={() => {
           router.push("/signUp");
         }}
-        buttonStyle="black-outlined"
+        buttonStyle="white-outlined"
         className="px-2 whitespace-nowrap"
       >
         Sign Up
@@ -28,7 +28,7 @@ const Header: React.VFC = () => {
         onClick={() => {
           router.push("/signIn");
         }}
-        buttonStyle="black-outlined"
+        buttonStyle="white-outlined"
         className="px-2 whitespace-nowrap"
       >
         Sign In
@@ -40,9 +40,9 @@ const Header: React.VFC = () => {
     <div className="flex space-x-3 items-center">
       <Button
         onClick={() => {
-          router.push("/");
+          router.push("/bookRegistration");
         }}
-        buttonStyle="black-outlined"
+        buttonStyle="white-outlined"
         className="px-2 whitespace-nowrap"
       >
         投稿する
@@ -58,7 +58,7 @@ const Header: React.VFC = () => {
           <div className="text-3xl font-bold text-white">Codemap</div>
         </a>
       </Link>
-      {authParams.uid ? signedInElement : signedOutElement}
+      {userInfo.auth.uid ? signedInElement : signedOutElement}
     </header>
   );
 };

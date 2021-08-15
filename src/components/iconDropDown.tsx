@@ -2,7 +2,7 @@ import React, { MouseEventHandler, useState } from "react";
 import Image from "next/image";
 import Dropdown from "./dropDown";
 import { useRecoilValue, useResetRecoilState } from "recoil";
-import { authState } from "~/recoil/auth";
+import { userInfoState } from "~/recoil/userInfo";
 import { useRouter } from "next/dist/client/router";
 import { signOutRequest } from "~/lib/api/auth";
 import Modal from "~/components/modal";
@@ -13,18 +13,18 @@ import Button from "./button";
  */
 
 const IconDropdown: React.VFC = () => {
-  const authParams = useRecoilValue(authState);
-  const resetAuthParams = useResetRecoilState(authState);
+  const userInfo = useRecoilValue(userInfoState);
+  const resetUserInfo = useResetRecoilState(userInfoState);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const router = useRouter();
   const signOut = async () => {
-    if (authParams.uid) {
-      const signOutParams = authParams;
+    if (userInfo.auth.uid) {
+      const signOutParams = userInfo.auth;
       try {
         const response = await signOutRequest(signOutParams);
         console.log(response);
-        resetAuthParams();
+        resetUserInfo();
         router.push("/");
       } catch (error) {
         console.log(error);
@@ -35,7 +35,7 @@ const IconDropdown: React.VFC = () => {
   const menuItems = [
     {
       text: "Profile",
-      onClick: () => router.push("/"),
+      onClick: () => router.push(`/users/${userInfo.userId}`),
     },
     {
       text: "Sign Out",
@@ -45,13 +45,13 @@ const IconDropdown: React.VFC = () => {
 
   return (
     <>
-      <Dropdown menuItems={menuItems}>
+      <Dropdown menuItems={menuItems} className="flex items-center">
         <Image
           src="/favicon.ico"
           alt="avatar"
           width={65}
           height={65}
-          className="rounded-full object-cover bg-gray-100"
+          className="rounded-full object-cover bg-red-200"
         />
       </Dropdown>
       <Modal

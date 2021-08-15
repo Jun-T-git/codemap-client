@@ -1,44 +1,44 @@
-import Head from "next/head";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import React from "react";
-import Title from "~/components/title";
-import Button from "~/components/button";
-import { deleteUserRequest } from "~/lib/api/auth";
-import { fetchUsersDetail } from "~/lib/api/users";
+import BookCard from "~/components/bookCard";
+import { getBooksRequest } from "~/lib/api/books";
+import { Book } from "~/lib/types/book";
 
 const Index: React.VFC = () => {
+  const [books, setBooks] = useState<Array<Book>>([]);
+
+  useEffect(() => {
+    (async () => {
+      await fetchBooks();
+    })();
+  }, []);
+
+  const fetchBooks = async () => {
+    try {
+      const response = await getBooksRequest();
+      console.log(response);
+      const booksData = response.data.data;
+      setBooks(booksData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <main>
-        <Title>トップ</Title>
-        <div className="flex flex-col">
-          <Button
-            buttonStyle="white-filled"
-            onClick={async () => {
-              try {
-                const data = await fetchUsersDetail("2");
-              } catch (error) {
-                console.log(error);
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 p-4">
+          {books.map((book) => (
+            <div key={book.id}>
+              {
+                <Link href={`/books/${book.id}`}>
+                  <div>
+                    <BookCard book={book} />
+                  </div>
+                </Link>
               }
-            }}
-          >
-            Fetch
-          </Button>
-          <Button
-            onClick={async () => {
-              try {
-                const data = await deleteUserRequest({
-                  uid: "test4@example.com",
-                  "access-token": "vnKmuOrm4eK0fuKQReB3RQ",
-                  client: "FsIavo6b6AK6hULH1HYgbg",
-                });
-              } catch (error) {
-                console.log(error);
-              }
-            }}
-          >
-            Delete
-          </Button>
+            </div>
+          ))}
         </div>
       </main>
     </div>
