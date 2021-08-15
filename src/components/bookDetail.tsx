@@ -15,7 +15,7 @@ const BookDetail: React.VFC<Props> = ({ book }) => {
   return (
     <div className="bg-white border rounded min-h-[15rem] p-5 flex space-x-10">
       <Image
-        src={book.image ? book.image : "/bookNoImage.png"}
+        src={book.image ? "/" + book.image : "/bookNoImage.png"}
         alt="avatar"
         width={250}
         height={250}

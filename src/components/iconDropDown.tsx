@@ -48,7 +48,9 @@ const IconDropdown: React.VFC = () => {
       <Dropdown menuItems={menuItems} className="flex items-center">
         <Image
           src={
-            userInfo.profile.image ? userInfo.profile.image : "/userNoImage.png"
+            userInfo.profile.image
+              ? "/" + userInfo.profile.image
+              : "/userNoImage.png"
           }
           alt="avatar"
           width={65}
